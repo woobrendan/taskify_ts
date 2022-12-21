@@ -11,6 +11,7 @@ type Person = {
   name: string,
   age?: number
 }
+
 let george: Person = {
   name: 'George',
   age: 22 
@@ -28,5 +29,29 @@ let printName: (name: string) => never;
 // const printName = (name: string) => {
 //   console.log('name:', name)
 // }
+
+
+interface People {
+  name: string,
+  age?: number
+}
+
+//extends inherits properties from interface People
+interface Guy extends People {
+  profession: string;
+}
+
+
+type A = {
+  a: string;
+  b: number;
+}
+
+//type B inherits the properties of type A
+// & can be used for types and interfaces to extend each other
+type B = A & {
+  c: string;
+  d: number;
+}
 
 export{}
