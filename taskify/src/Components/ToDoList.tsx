@@ -1,6 +1,7 @@
 import React from 'react'
 import { ToDo } from '../model'
 import '../Styles/styles.scss'
+import ToDoItem from './ToDoItem'
 
 interface Props {
   toDos: ToDo[];
@@ -10,7 +11,9 @@ interface Props {
 const ToDoList: React.FC<Props> = ({ toDos, setToDos }) => {
   return (
     <div className='toDos'>
-      
+      {toDos.map(toDo => (
+        <ToDoItem />
+      ))}
     </div>
   )
 }
