@@ -42,4 +42,11 @@
       box-shadow: 0 0 5px black;
     }
   }
+
+  .toDos {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
+  }
 }
