@@ -10,7 +10,12 @@ const App: React.FC = () => {
   const [toDoList, setToDoList] = useState<ToDo[]>([]);
 
   const handleAdd = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    if (toDo) {
+      setToDoList([...toDoList, {id: Date.now(), toDo, isDone: false}])
+      setToDo('')
+    }
   }
 
   return (
