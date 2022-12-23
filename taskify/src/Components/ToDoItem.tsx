@@ -1,6 +1,13 @@
 import React from 'react'
+import { ToDo } from '../model'
 
-const ToDoItem: React.FC = () => {
+interface Props {
+  toDo: ToDo;
+  toDos: ToDo[];
+  setToDos: React.Dispatch<React.SetStateAction<ToDo[]>> 
+}
+
+const ToDoItem: React.FC<Props> = ({ toDo }) => {
   return (
     <div>
       
