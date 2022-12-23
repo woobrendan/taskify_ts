@@ -26,8 +26,18 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
     setToDos(toDos.filter((toDo) => toDo.id !== id));
   };
 
+  const handleEdit = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+    setToDos(
+      toDos.map((toDo) =>
+        toDo.id === id ? { ...toDo, toDo: editToDo } : toDo,
+      ),
+    );
+    setEdit(false);
+  };
+
   return (
-    <form className="toDos__single">
+    <form className="toDos__single" onSubmit={(e) => handleEdit(e, toDo.id)}>
       {edit ? (
         <input
           value={editToDo}
