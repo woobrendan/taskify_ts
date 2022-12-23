@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { ToDo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
@@ -11,6 +11,9 @@ type Props = {
 };
 
 const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editToDo, setEditToDo] = useState<string>(toDo.toDo);
+
   const handleDone = (id: number) => {
     setToDos(
       toDos.map((task) =>
@@ -25,13 +28,26 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
 
   return (
     <form className="toDos__single">
-      {toDo.isDone ? (
+      {edit ? (
+        <input
+          value={editToDo}
+          onChange={(e) => setEditToDo(e.target.value)}
+          className="toDos__single--test"
+        />
+      ) : toDo.isDone ? (
         <s className="toDos__single--text">{toDo.toDo}</s>
       ) : (
         <span className="toDos__single--text">{toDo.toDo}</span>
       )}
       <div>
-        <span className="icon">
+        <span
+          className="icon"
+          onClick={() => {
+            if (!edit && !toDo.isDone) {
+              setEdit(!edit);
+            }
+          }}
+        >
           <AiFillEdit />
         </span>
         <span className="icon" onClick={() => handleDelete(toDo.id)}>
