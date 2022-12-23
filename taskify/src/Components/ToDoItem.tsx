@@ -21,7 +21,11 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
 
   return (
     <form className="toDos__single">
-      <span className="toDos__single--text">{toDo.toDo}</span>
+      {toDo.isDone ? (
+        <s className="toDos__single--text">{toDo.toDo}</s>
+      ) : (
+        <span className="toDos__single--text">{toDo.toDo}</span>
+      )}
       <div>
         <span className="icon">
           <AiFillEdit />
