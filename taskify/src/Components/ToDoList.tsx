@@ -12,7 +12,12 @@ const ToDoList: React.FC<Props> = ({ toDos, setToDos }) => {
   return (
     <div className='toDos'>
       {toDos.map(toDo => (
-        <ToDoItem />
+        <ToDoItem 
+          key={toDo.id} 
+          toDo={toDo} 
+          toDos={toDos}
+          setToDos={setToDos}
+          />
       ))}
     </div>
   )
