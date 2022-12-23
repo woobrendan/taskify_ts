@@ -1,17 +1,17 @@
 import React from 'react'
 import { ToDo } from '../model'
 
-interface Props {
+type Props = {
   toDo: ToDo;
   toDos: ToDo[];
   setToDos: React.Dispatch<React.SetStateAction<ToDo[]>> 
 }
 
-const ToDoItem: React.FC<Props> = ({ toDo }) => {
+const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
   return (
-    <div>
-      
-    </div>
+    <form className="toDos__single">
+      <span className="toDos__single--text"></span>
+    </form>
   )
 }
 
