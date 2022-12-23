@@ -19,6 +19,10 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
     );
   };
 
+  const handleDelete = (id: number) => {
+    setToDos(toDos.filter((toDo) => toDo.id !== id));
+  };
+
   return (
     <form className="toDos__single">
       {toDo.isDone ? (
@@ -30,7 +34,7 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
         <span className="icon">
           <AiFillEdit />
         </span>
-        <span className="icon">
+        <span className="icon" onClick={() => handleDelete(toDo.id)}>
           <AiFillDelete />
         </span>
         <span className="icon" onClick={() => handleDone(toDo.id)}>
