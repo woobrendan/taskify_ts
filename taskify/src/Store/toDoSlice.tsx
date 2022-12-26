@@ -3,9 +3,14 @@ import { ToDo } from "../model";
 
 const toDoSlice = createSlice({
   name: "tasks",
-  initialState: { toDos: [] },
+  initialState: { toDos: [] as ToDo[] },
   reducers: {
-    addToDo(state, action) {},
+    addToDo(state, action) {
+      state.toDos = [
+        ...state.toDos,
+        { id: Date.now(), toDo: action.payload, isDone: false },
+      ];
+    },
     removeTodo(state, action) {},
     completeToDo(state, action) {},
   },
