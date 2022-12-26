@@ -11,8 +11,14 @@ const toDoSlice = createSlice({
         { id: Date.now(), toDo: action.payload, isDone: false },
       ];
     },
-    removeTodo(state, action) {},
-    completeToDo(state, action) {},
+    removeTodo(state, action) {
+      state.toDos = state.toDos.filter((task) => task.id !== action.payload);
+    },
+    completeToDo(state, action) {
+      state.toDos = state.toDos.map((task) =>
+        task.id !== action.payload ? { ...task, isDone: !task.isDone } : task,
+      );
+    },
   },
 });
 
