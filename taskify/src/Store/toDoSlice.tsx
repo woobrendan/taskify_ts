@@ -11,7 +11,7 @@ const toDoSlice = createSlice({
         { id: Date.now(), toDo: action.payload, isDone: false },
       ];
     },
-    removeTodo(state, action) {
+    removeToDo(state, action) {
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
     },
     completeToDo(state, action) {
