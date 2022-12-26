@@ -31,4 +31,6 @@ const toDoSlice = createSlice({
 
 export const toDoActions = toDoSlice.actions;
 
+export const selectToDos = (state: RootState) => state.toDo.toDos;
+
 export default toDoSlice;
