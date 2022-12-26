@@ -3,6 +3,8 @@ import { ToDo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import "../Styles/styles.scss";
+import { useDispatch } from "react-redux";
+import { toDoActions } from "../Store/toDoSlice";
 
 type Props = {
   toDo: ToDo;
@@ -11,6 +13,7 @@ type Props = {
 };
 
 const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
+  const dispatch = useDispatch();
   const [edit, setEdit] = useState<boolean>(false);
   const [editToDo, setEditToDo] = useState<string>(toDo.toDo);
 
@@ -23,7 +26,8 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
   };
 
   const handleDelete = (id: number) => {
-    setToDos(toDos.filter((toDo) => toDo.id !== id));
+    // setToDos(toDos.filter((toDo) => toDo.id !== id));
+    dispatch(toDoActions.removeToDo(id));
   };
 
   const handleEdit = (e: React.FormEvent, id: number) => {
