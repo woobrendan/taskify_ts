@@ -5,19 +5,13 @@ import ToDoItem from "./ToDoItem";
 
 interface Props {
   toDos: ToDo[];
-  // setToDos: React.Dispatch<React.SetStateAction<ToDo[]>>
 }
 
-const ToDoList: React.FC<Props> = ({ toDos /*setToDos*/ }) => {
+const ToDoList: React.FC<Props> = ({ toDos }) => {
   return (
     <div className="toDos">
       {toDos.map((toDo) => (
-        <ToDoItem
-          key={toDo.id}
-          toDo={toDo}
-          toDos={toDos}
-          // setToDos={setToDos}
-        />
+        <ToDoItem key={toDo.id} toDo={toDo} toDos={toDos} />
       ))}
     </div>
   );
