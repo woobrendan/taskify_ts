@@ -23,7 +23,7 @@ const toDoSlice = createSlice({
     },
     completeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos.map((task) =>
-        task.id !== action.payload ? { ...task, isDone: !task.isDone } : task,
+        task.id === action.payload ? { ...task, isDone: !task.isDone } : task,
       );
     },
   },
