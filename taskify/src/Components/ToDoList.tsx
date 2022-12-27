@@ -9,7 +9,7 @@ const ToDoList: React.FC = () => {
   return (
     <div className="toDos">
       {toDos.map((toDo) => (
-        <ToDoItem key={toDo.id} toDo={toDo} toDos={toDos} />
+        <ToDoItem key={toDo.id} toDo={toDo} />
       ))}
     </div>
   );
