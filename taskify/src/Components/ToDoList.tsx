@@ -1,13 +1,11 @@
 import React from "react";
-import { ToDo } from "../model";
 import "../Styles/styles.scss";
 import ToDoItem from "./ToDoItem";
+import { useAppSelector } from "../Store/hooks";
 
-interface Props {
-  toDos: ToDo[];
-}
+const ToDoList: React.FC = () => {
+  const toDos = useAppSelector((state) => state.toDo.toDos);
 
-const ToDoList: React.FC<Props> = ({ toDos }) => {
   return (
     <div className="toDos">
       {toDos.map((toDo) => (
