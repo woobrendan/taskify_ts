@@ -26,6 +26,13 @@ const toDoSlice = createSlice({
         task.id === action.payload ? { ...task, isDone: !task.isDone } : task,
       );
     },
+    editToDo(state, action: PayloadAction<{ id: number; value: string }>) {
+      state.toDos = state.toDos.map((task) =>
+        task.id === action.payload.id
+          ? { ...task, toDo: action.payload.value }
+          : task,
+      );
+    },
   },
 });
 
