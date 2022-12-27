@@ -12,16 +12,16 @@ const toDoSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addToDo(state, action) {
+    addToDo(state, action: PayloadAction<string>) {
       state.toDos = [
         ...state.toDos,
         { id: Date.now(), toDo: action.payload, isDone: false },
       ];
     },
-    removeToDo(state, action) {
+    removeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
     },
-    completeToDo(state, action) {
+    completeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos.map((task) =>
         task.id !== action.payload ? { ...task, isDone: !task.isDone } : task,
       );
