@@ -33,12 +33,8 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos /*setToDos */ }) => {
 
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
-    // setToDos(
-    //   toDos.map((toDo) =>
-    //     toDo.id === id ? { ...toDo, toDo: editToDo } : toDo,
-    //   ),
-    // );
     setEdit(false);
+    dispatch(toDoActions.editToDo({ id, value: editToDo }));
   };
 
   useEffect(() => {
