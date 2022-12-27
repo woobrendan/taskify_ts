@@ -7,10 +7,24 @@ const ToDoList: React.FC = () => {
   const toDos = useAppSelector((state) => state.toDo.toDos);
 
   return (
-    <div className="toDos">
-      {toDos.map((toDo) => (
-        <ToDoItem key={toDo.id} toDo={toDo} />
-      ))}
+    // <div className="toDos">
+    //   {toDos.map((toDo) => (
+    //     <ToDoItem key={toDo.id} toDo={toDo} />
+    //   ))}
+    // </div>
+    <div className="container">
+      <div className="toDos">
+        <span className="toDos__heading">Active Tasks</span>
+        {toDos.map((toDo) => (
+          <ToDoItem key={toDo.id} toDo={toDo} />
+        ))}
+      </div>
+      <div className="toDos remove">
+        <span className="toDos__heading">Completed Tasks</span>
+        {toDos.map((toDo) => (
+          <ToDoItem key={toDo.id} toDo={toDo} />
+        ))}
+      </div>
     </div>
   );
 };
