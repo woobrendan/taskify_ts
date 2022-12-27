@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Styles/App.scss";
 import InputField from "./Components/InputField";
-import { ToDo } from "./model";
 import ToDoList from "./Components/ToDoList";
 import { useAppDispatch, useAppSelector } from "./Store/hooks";
 import { toDoActions } from "./Store/toDoSlice";
@@ -10,7 +9,6 @@ import { toDoActions } from "./Store/toDoSlice";
 const App: React.FC = () => {
   const [toDo, setToDo] = useState<string>("");
   const dispatch = useAppDispatch();
-  // const [toDos, setToDos] = useState<ToDo[]>([]);
 
   const toDos = useAppSelector((state) => state.toDo.toDos);
 
@@ -26,7 +24,7 @@ const App: React.FC = () => {
     <div className="App">
       <span className="heading">Taskify</span>
       <InputField toDo={toDo} setToDo={setToDo} handleAdd={handleAdd} />
-      <ToDoList toDos={toDos} /*setToDos={setToDos}*/ />
+      <ToDoList toDos={toDos} />
     </div>
   );
 };
