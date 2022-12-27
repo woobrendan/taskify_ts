@@ -1,9 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "./store";
 import { ToDo } from "../model";
+
+interface ToDoState {
+  toDos: ToDo[];
+}
+
+const initialState: ToDoState = { toDos: [] };
 
 const toDoSlice = createSlice({
   name: "tasks",
-  initialState: { toDos: [] as ToDo[] },
+  initialState,
   reducers: {
     addToDo(state, action) {
       state.toDos = [
