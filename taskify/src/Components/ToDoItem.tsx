@@ -3,26 +3,27 @@ import { ToDo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import "../Styles/styles.scss";
-import { useDispatch } from "react-redux";
 import { toDoActions } from "../Store/toDoSlice";
+import { useAppDispatch } from "../Store/hooks";
 
 type Props = {
   toDo: ToDo;
   toDos: ToDo[];
-  setToDos: React.Dispatch<React.SetStateAction<ToDo[]>>;
+  // setToDos: React.Dispatch<React.SetStateAction<ToDo[]>>;
 };
 
-const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
-  const dispatch = useDispatch();
+const ToDoItem: React.FC<Props> = ({ toDo, toDos /*setToDos */ }) => {
+  const dispatch = useAppDispatch();
   const [edit, setEdit] = useState<boolean>(false);
   const [editToDo, setEditToDo] = useState<string>(toDo.toDo);
 
   const handleDone = (id: number) => {
-    setToDos(
-      toDos.map((task) =>
-        task.id === id ? { ...task, isDone: !task.isDone } : task,
-      ),
-    );
+    dispatch(toDoActions.completeToDo(id));
+    // setToDos(
+    //   toDos.map((task) =>
+    //     task.id === id ? { ...task, isDone: !task.isDone } : task,
+    //   ),
+    // );
   };
 
   const handleDelete = (id: number) => {
@@ -32,11 +33,11 @@ const ToDoItem: React.FC<Props> = ({ toDo, toDos, setToDos }) => {
 
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
-    setToDos(
-      toDos.map((toDo) =>
-        toDo.id === id ? { ...toDo, toDo: editToDo } : toDo,
-      ),
-    );
+    // setToDos(
+    //   toDos.map((toDo) =>
+    //     toDo.id === id ? { ...toDo, toDo: editToDo } : toDo,
+    //   ),
+    // );
     setEdit(false);
   };
 
