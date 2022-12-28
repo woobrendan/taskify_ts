@@ -5,10 +5,9 @@ import { ToDo } from "../model";
 interface ToDoState {
   toDos: ToDo[];
   completedToDos: ToDo[];
-  allToDos: ToDo[];
 }
 
-const initialState: ToDoState = { toDos: [], completedToDos: [], allToDos: [] };
+const initialState: ToDoState = { toDos: [], completedToDos: [] };
 
 const toDoSlice = createSlice({
   name: "tasks",
@@ -17,7 +16,6 @@ const toDoSlice = createSlice({
     addToDo(state, action: PayloadAction<string>) {
       const newTask = { id: Date.now(), toDo: action.payload, isDone: false };
       state.toDos = [...state.toDos, newTask];
-      state.allToDos = [...state.allToDos, newTask];
     },
     removeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
@@ -26,22 +24,22 @@ const toDoSlice = createSlice({
       );
     },
     completeToDo(state, action: PayloadAction<number>) {
-      // [...state.toDos, ...state.completedToDos].find;
       state.toDos = state.toDos
         .map((task) => {
           if (task.id === action.payload) {
-            task = { ...task, isDone: !task.isDone };
-            state.completedToDos.push(task);
+            task = { ...task, isDone: true };
+            state.completedToDos = [...state.completedToDos, task];
             return task;
           } else return task;
         })
         .filter((task) => task.id !== action.payload);
-
+    },
+    undoCompleteToDo(state, action: PayloadAction<number>) {
       state.completedToDos = state.completedToDos
         .map((task) => {
           if (task.id === action.payload) {
-            task = { ...task, isDone: !task.isDone };
-            state.toDos.push(task);
+            task = { ...task, isDone: false };
+            state.toDos = [...state.toDos, task];
             return task;
           } else return task;
         })
