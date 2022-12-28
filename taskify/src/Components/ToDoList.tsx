@@ -12,6 +12,7 @@ interface Props {
 
 const ToDoList: React.FC<Props> = ({ completedToDos, setCompletedToDos }) => {
   const toDos = useAppSelector((state) => state.toDo.toDos);
+  const finished = useAppSelector((state) => state.toDo.completedToDos);
 
   return (
     <div className="container">
@@ -37,7 +38,7 @@ const ToDoList: React.FC<Props> = ({ completedToDos, setCompletedToDos }) => {
             {...provided.droppableProps}
           >
             <span className="toDos__heading">Completed Tasks</span>
-            {toDos.map((toDo) => (
+            {finished.map((toDo) => (
               <ToDoItem key={toDo.id} toDo={toDo} />
             ))}
           </div>
