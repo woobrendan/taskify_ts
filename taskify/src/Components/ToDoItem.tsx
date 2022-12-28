@@ -8,15 +8,18 @@ import { useAppDispatch } from "../Store/hooks";
 
 type Props = {
   toDo: ToDo;
+  fromComponent?: string;
 };
 
-const ToDoItem: React.FC<Props> = ({ toDo }) => {
+const ToDoItem: React.FC<Props> = ({ toDo, fromComponent }) => {
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState<boolean>(false);
   const [editToDo, setEditToDo] = useState<string>(toDo.toDo);
 
   const handleDone = (id: number) => {
-    dispatch(toDoActions.completeToDo(id));
+    fromComponent === "remove"
+      ? dispatch(toDoActions.undoCompleteToDo(id))
+      : dispatch(toDoActions.completeToDo(id));
   };
 
   const handleDelete = (id: number) => {
