@@ -5,19 +5,19 @@ import { ToDo } from "../model";
 interface ToDoState {
   toDos: ToDo[];
   completedToDos: ToDo[];
+  allToDos: ToDo[];
 }
 
-const initialState: ToDoState = { toDos: [], completedToDos: [] };
+const initialState: ToDoState = { toDos: [], completedToDos: [], allToDos: [] };
 
 const toDoSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
     addToDo(state, action: PayloadAction<string>) {
-      state.toDos = [
-        ...state.toDos,
-        { id: Date.now(), toDo: action.payload, isDone: false },
-      ];
+      const newTask = { id: Date.now(), toDo: action.payload, isDone: false };
+      state.toDos = [...state.toDos, newTask];
+      state.allToDos = [...state.allToDos, newTask];
     },
     removeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
@@ -26,11 +26,22 @@ const toDoSlice = createSlice({
       );
     },
     completeToDo(state, action: PayloadAction<number>) {
+      // [...state.toDos, ...state.completedToDos].find;
       state.toDos = state.toDos
         .map((task) => {
           if (task.id === action.payload) {
-            task = { ...task, isDone: true };
+            task = { ...task, isDone: !task.isDone };
             state.completedToDos.push(task);
+            return task;
+          } else return task;
+        })
+        .filter((task) => task.id !== action.payload);
+
+      state.completedToDos = state.completedToDos
+        .map((task) => {
+          if (task.id === action.payload) {
+            task = { ...task, isDone: !task.isDone };
+            state.toDos.push(task);
             return task;
           } else return task;
         })
