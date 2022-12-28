@@ -21,6 +21,9 @@ const toDoSlice = createSlice({
     },
     removeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
+      state.completedToDos = state.completedToDos.filter(
+        (task) => task.id !== action.payload,
+      );
     },
     completeToDo(state, action: PayloadAction<number>) {
       state.toDos = state.toDos
