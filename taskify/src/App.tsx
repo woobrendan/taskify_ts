@@ -5,6 +5,7 @@ import ToDoList from "./Components/ToDoList";
 import { useAppDispatch } from "./Store/hooks";
 import { toDoActions } from "./Store/toDoSlice";
 import { ToDo } from "./model";
+import { DragDropContext } from "react-beautiful-dnd";
 
 //React functional component
 const App: React.FC = () => {
@@ -21,14 +22,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <span className="heading">Taskify</span>
-      <InputField toDo={toDo} setToDo={setToDo} handleAdd={handleAdd} />
-      <ToDoList
-        completedToDos={completedToDos}
-        setCompletedToDos={setCompletedToDos}
-      />
-    </div>
+    <DragDropContext>
+      <div className="App">
+        <span className="heading">Taskify</span>
+        <InputField toDo={toDo} setToDo={setToDo} handleAdd={handleAdd} />
+        <ToDoList
+          completedToDos={completedToDos}
+          setCompletedToDos={setCompletedToDos}
+        />
+      </div>
+    </DragDropContext>
   );
 };
 
