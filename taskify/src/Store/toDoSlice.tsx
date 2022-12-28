@@ -4,9 +4,10 @@ import { ToDo } from "../model";
 
 interface ToDoState {
   toDos: ToDo[];
+  completedToDos: ToDo[];
 }
 
-const initialState: ToDoState = { toDos: [] };
+const initialState: ToDoState = { toDos: [], completedToDos: [] };
 
 const toDoSlice = createSlice({
   name: "tasks",
@@ -22,9 +23,13 @@ const toDoSlice = createSlice({
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
     },
     completeToDo(state, action: PayloadAction<number>) {
-      state.toDos = state.toDos.map((task) =>
-        task.id === action.payload ? { ...task, isDone: !task.isDone } : task,
-      );
+      state.toDos = state.toDos.map((task) => {
+        if (task.id === action.payload) {
+          task = { ...task, isDone: true };
+          state.completedToDos.push(task);
+          return task;
+        } else return task;
+      });
     },
     editToDo(state, action: PayloadAction<{ id: number; value: string }>) {
       state.toDos = state.toDos.map((task) =>
