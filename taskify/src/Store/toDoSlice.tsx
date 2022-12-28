@@ -23,13 +23,15 @@ const toDoSlice = createSlice({
       state.toDos = state.toDos.filter((task) => task.id !== action.payload);
     },
     completeToDo(state, action: PayloadAction<number>) {
-      state.toDos = state.toDos.map((task) => {
-        if (task.id === action.payload) {
-          task = { ...task, isDone: true };
-          state.completedToDos.push(task);
-          return task;
-        } else return task;
-      });
+      state.toDos = state.toDos
+        .map((task) => {
+          if (task.id === action.payload) {
+            task = { ...task, isDone: true };
+            state.completedToDos.push(task);
+            return task;
+          } else return task;
+        })
+        .filter((task) => task.id !== action.payload);
     },
     editToDo(state, action: PayloadAction<{ id: number; value: string }>) {
       state.toDos = state.toDos.map((task) =>
