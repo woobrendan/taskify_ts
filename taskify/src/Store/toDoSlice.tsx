@@ -46,16 +46,11 @@ const toDoSlice = createSlice({
         .filter((task) => task.id !== action.payload);
     },
     editToDo(state, action: PayloadAction<{ id: number; value: string }>) {
-      const all: ToDo[] = [...state.toDos, ...state.completedToDos];
-      const selected = all.find((task) => task.id === action.payload.id);
-
-      if (!selected?.isDone) {
-        state.toDos = state.toDos.map((task) =>
-          task.id === action.payload.id
-            ? { ...task, toDo: action.payload.value }
-            : task,
-        );
-      }
+      state.toDos = state.toDos.map((task) =>
+        task.id === action.payload.id
+          ? { ...task, toDo: action.payload.value }
+          : task,
+      );
     },
   },
 });
