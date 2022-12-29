@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import "./Styles/App.scss";
 import InputField from "./Components/InputField";
 import ToDoList from "./Components/ToDoList";
-import { useAppDispatch } from "./Store/hooks";
 import { toDoActions } from "./Store/toDoSlice";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useAppSelector } from "./Store/hooks";
+import { useAppSelector, useAppDispatch } from "./Store/hooks";
 
 //React functional component
 const App: React.FC = () => {
@@ -33,8 +32,8 @@ const App: React.FC = () => {
       return;
 
     let add,
-      active = toDos,
-      complete = completedToDos;
+      active = [...toDos],
+      complete = [...completedToDos];
 
     if (source.droppableId === "ToDosList") {
       add = active[source.index];
@@ -49,9 +48,8 @@ const App: React.FC = () => {
     } else {
       complete.splice(destination.index, 0, add);
     }
-
-    //setCompletedToDos(completed)
-    //setTodos(active)
+    dispatch(toDoActions.setArray({ newArr: complete, isFin: true }));
+    dispatch(toDoActions.setArray({ newArr: active, isFin: false }));
   };
 
   return (
