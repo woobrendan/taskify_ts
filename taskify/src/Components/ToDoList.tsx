@@ -2,17 +2,11 @@ import React from "react";
 import "../Styles/styles.scss";
 import ToDoItem from "./ToDoItem";
 import { useAppSelector } from "../Store/hooks";
-import { ToDo } from "../model";
 import { Droppable } from "react-beautiful-dnd";
 
-interface Props {
-  completedToDos: ToDo[];
-  setCompletedToDos: React.Dispatch<React.SetStateAction<ToDo[]>>;
-}
-
-const ToDoList: React.FC<Props> = ({ completedToDos, setCompletedToDos }) => {
+const ToDoList: React.FC = () => {
   const toDos = useAppSelector((state) => state.toDo.toDos);
-  const finished = useAppSelector((state) => state.toDo.completedToDos);
+  const completedToDos = useAppSelector((state) => state.toDo.completedToDos);
 
   return (
     <div className="container">
@@ -38,7 +32,7 @@ const ToDoList: React.FC<Props> = ({ completedToDos, setCompletedToDos }) => {
             {...provided.droppableProps}
           >
             <span className="toDos__heading">Completed Tasks</span>
-            {finished.map((toDo) => (
+            {completedToDos.map((toDo) => (
               <ToDoItem key={toDo.id} toDo={toDo} fromComponent="remove" />
             ))}
           </div>
