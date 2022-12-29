@@ -21,6 +21,7 @@ const ToDoList: React.FC = () => {
             {toDos.map((toDo, index) => (
               <ToDoItem key={toDo.id} toDo={toDo} index={index} />
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
@@ -40,6 +41,7 @@ const ToDoList: React.FC = () => {
                 index={index}
               />
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
