@@ -54,7 +54,9 @@ const toDoSlice = createSlice({
     },
     setArray(state, action: PayloadAction<{ newArr: ToDo[]; isFin: boolean }>) {
       action.payload.isFin
-        ? (state.completedToDos = action.payload.newArr)
+        ? (state.completedToDos = action.payload.newArr.map((toDo) => {
+            return { ...toDo, isDone: true };
+          }))
         : (state.toDos = action.payload.newArr);
     },
   },
