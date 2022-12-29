@@ -42,9 +42,9 @@ const ToDoItem: React.FC<Props> = ({ toDo, fromComponent, index }) => {
 
   return (
     <Draggable draggableId={toDo.id.toString()} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <form
-          className="toDos__single"
+          className={`toDos__single ${snapshot.isDragging ? "drag" : ""}`}
           onSubmit={(e) => handleEdit(e, toDo.id)}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
