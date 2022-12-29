@@ -52,6 +52,11 @@ const toDoSlice = createSlice({
           : task,
       );
     },
+    setArray(state, action: PayloadAction<{ newArr: ToDo[]; isFin: boolean }>) {
+      action.payload.isFin
+        ? (state.completedToDos = action.payload.newArr)
+        : (state.toDos = action.payload.newArr);
+    },
   },
 });
 
