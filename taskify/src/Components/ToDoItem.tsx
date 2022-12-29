@@ -9,9 +9,10 @@ import { useAppDispatch } from "../Store/hooks";
 type Props = {
   toDo: ToDo;
   fromComponent?: string;
+  index: number;
 };
 
-const ToDoItem: React.FC<Props> = ({ toDo, fromComponent }) => {
+const ToDoItem: React.FC<Props> = ({ toDo, fromComponent, index }) => {
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState<boolean>(false);
   const [editToDo, setEditToDo] = useState<string>(toDo.toDo);
