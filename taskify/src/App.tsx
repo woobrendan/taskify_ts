@@ -53,7 +53,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={() => {}}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <span className="heading">Taskify</span>
         <InputField toDo={toDo} setToDo={setToDo} handleAdd={handleAdd} />
